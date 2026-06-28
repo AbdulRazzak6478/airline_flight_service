@@ -1,0 +1,17 @@
+
+
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
+CREATE TABLE cities (
+      id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+
+      name VARCHAR(50) NOT NULL UNIQUE,
+
+      state VARCHAR(100) NOT NULL,
+
+      country VARCHAR(50) NOT NULL,
+
+      created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+      updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
