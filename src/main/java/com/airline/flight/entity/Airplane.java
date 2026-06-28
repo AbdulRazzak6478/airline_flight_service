@@ -1,9 +1,6 @@
 package com.airline.flight.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,6 +11,8 @@ import org.hibernate.annotations.UuidGenerator;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 
@@ -27,6 +26,7 @@ import java.util.UUID;
 public class Airplane {
 
     @Id
+    @GeneratedValue
     @UuidGenerator
     private UUID id;
 
@@ -42,6 +42,7 @@ public class Airplane {
     @Column(name = "seat_capacity",  nullable = false)
     private int seatCapacity;
 
+
     @CreationTimestamp
     @Column(name = "created_at",  nullable = false)
     private LocalDateTime createdAt;
@@ -49,4 +50,7 @@ public class Airplane {
     @UpdateTimestamp
     @Column(name = "updated_at",  nullable = false)
     private LocalDateTime updatedAt;
+
+    @OneToMany(mappedBy = "airplane")
+    private List<Flight> flights = new ArrayList<>();
 }

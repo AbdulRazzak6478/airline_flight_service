@@ -12,6 +12,8 @@ import org.hibernate.annotations.UuidGenerator;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -24,6 +26,7 @@ import java.util.UUID;
 public class Airport {
 
     @Id
+    @GeneratedValue
     @UuidGenerator
     private UUID id;
 
@@ -53,5 +56,12 @@ public class Airport {
     @UpdateTimestamp
     @Column( name= "updated_at", nullable = false)
     private LocalDateTime updatedAt;
+
+
+    @OneToMany(mappedBy = "departureAirport")
+    private List<Flight> departingFlights  = new ArrayList<>();
+
+    @OneToMany(mappedBy = "arrivalAirport")
+    private List<Flight> arrivingFlights = new ArrayList<>();
 
 }

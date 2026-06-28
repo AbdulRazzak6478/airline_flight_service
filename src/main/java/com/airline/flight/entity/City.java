@@ -26,6 +26,7 @@ import java.util.UUID;
 public class City {
 
     @Id
+    @GeneratedValue
     @UuidGenerator
     private UUID id;
 
@@ -39,10 +40,6 @@ public class City {
     private String country;
 
 
-    @OneToMany(mappedBy = "city")
-    private List<Airport> airports = new ArrayList<>();
-
-
     @CreationTimestamp
     @Column(name = "created_at",  nullable = false)
     private LocalDateTime createdAt;
@@ -50,4 +47,7 @@ public class City {
     @UpdateTimestamp
     @Column(name = "updated_at",  nullable = false)
     private LocalDateTime updatedAt;
+
+    @OneToMany(mappedBy = "city")
+    private List<Airport> airports = new ArrayList<>();
 }
