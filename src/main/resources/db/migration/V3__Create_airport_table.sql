@@ -1,0 +1,20 @@
+
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
+CREATE TABLE airports (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+
+    name VARCHAR(100) NOT NULL,
+    code VARCHAR(40) NOT NULL,
+    address VARCHAR(255) NOT NULL,
+
+    city_id UUID NOT NULL,
+
+    latitude DOUBLE PRECISION,
+    longitude DOUBLE PRECISION,
+
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT fk_airport_city FOREIGN KEY (city_id) REFERENCES cities(id)
+);

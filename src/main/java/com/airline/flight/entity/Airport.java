@@ -1,5 +1,6 @@
 package com.airline.flight.entity;
 
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,43 +12,46 @@ import org.hibernate.annotations.UuidGenerator;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
-
-@Component
 @Data
+@Builder
+@Component
 @Entity
+@Table( name = "airports")
 @NoArgsConstructor
 @AllArgsConstructor
-@Table( name = "cities")
-@Builder
-public class City {
+public class Airport {
 
     @Id
     @UuidGenerator
     private UUID id;
 
-    @Column(name = "name", nullable = false,  unique = true)
+    @Column( name = "name", nullable = false)
     private String name;
 
-    @Column(name = "state", nullable = false)
-    private String state;
+    @Column( name = "code", nullable = false, unique = true)
+    private String code;
 
-    @Column(name = "country", nullable = false)
-    private String country;
+    @Column( name = "address", nullable = false)
+    private String address;
 
+    @Column( name = "latitude", nullable = false)
+    private  Double latitude;
 
-    @OneToMany(mappedBy = "city")
-    private List<Airport> airports = new ArrayList<>();
+    @Column( name = "longitude", nullable = false)
+    private  Double longitude;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "city_id")
+    private City city;
 
     @CreationTimestamp
-    @Column(name = "created_at",  nullable = false)
+    @Column( name= "created_at", nullable = false)
     private LocalDateTime createdAt;
 
     @UpdateTimestamp
-    @Column(name = "updated_at",  nullable = false)
+    @Column( name= "updated_at", nullable = false)
     private LocalDateTime updatedAt;
+
 }
