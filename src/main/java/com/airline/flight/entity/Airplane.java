@@ -53,4 +53,7 @@ public class Airplane {
 
     @OneToMany(mappedBy = "airplane")
     private List<Flight> flights = new ArrayList<>();
+
+    @OneToMany(mappedBy = "airplane")
+    private List<AirplaneSeat> seats = new ArrayList<>();
 }
