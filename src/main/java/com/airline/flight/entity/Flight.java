@@ -1,6 +1,7 @@
 package com.airline.flight.entity;
 
 
+import com.airline.flight.enums.FlightStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -52,8 +53,10 @@ public class Flight {
 
     @Column( name = "price", nullable = false)
     private BigDecimal price;
+
+    @Enumerated(EnumType.STRING)
     @Column( name = "status", nullable = false)
-    private String status;
+    private FlightStatus status;
 
     @Column( name = "boarding_gate", nullable = true)
     private String boardingGate;
