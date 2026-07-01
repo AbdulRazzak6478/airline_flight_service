@@ -52,8 +52,8 @@ public class Airplane {
     private LocalDateTime updatedAt;
 
     @OneToMany(mappedBy = "airplane")
-    private List<Flight> flights = new ArrayList<>();
+    private List<Flight> flights;
 
     @OneToMany(mappedBy = "airplane")
-    private List<AirplaneSeat> seats = new ArrayList<>();
+    private List<AirplaneSeat> seats;
 }
