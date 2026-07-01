@@ -8,4 +8,7 @@ import java.util.UUID;
 
 @Repository
 public interface AirplaneRepository extends JpaRepository<Airplane, UUID> {
+
+    public Boolean existsByRegistrationNumber(String registrationNumber);
+    public Boolean existsByModelNumber(String modelNumber);
 }

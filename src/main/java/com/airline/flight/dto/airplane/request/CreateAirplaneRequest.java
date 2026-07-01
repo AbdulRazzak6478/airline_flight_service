@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CreateAirplaneRequest {
 
+    @NotNull( message = "Model Number is missing.")
     @NotBlank( message = "Model number is required.")
     @Size(max = 100, message = "Model number cannot exceeds 100 characters.")
     private String modelNumber;
@@ -27,7 +28,7 @@ public class CreateAirplaneRequest {
 
     @NotNull(message = "Seat capacity is required.")
     @Min(value = 1, message = "Seat capacity must be at least 1.")
-    @Max(value = 1000, message = "Seat capacity cannot exceed 1000.")
+    @Max(value = 700, message = "Seat capacity cannot exceed 700.")
     private Integer seatCapacity;
 
 }

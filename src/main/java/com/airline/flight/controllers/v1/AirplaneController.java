@@ -2,7 +2,9 @@ package com.airline.flight.controllers.v1;
 
 import com.airline.flight.constants.ApiRoutes;
 import com.airline.flight.dto.airplane.request.CreateAirplaneRequest;
+import com.airline.flight.dto.airplane.response.CreateAirplaneResponse;
 import com.airline.flight.dto.common.ApiResponse;
+import com.airline.flight.dto.common.ApiResponseBuilder;
 import com.airline.flight.entity.Airplane;
 import com.airline.flight.services.AirplaneService;
 import jakarta.validation.Valid;
@@ -31,24 +33,20 @@ public class AirplaneController {
     private AirplaneService airplaneService;
 
     @PostMapping
-    public ResponseEntity<?> addAirplane(
+    public ResponseEntity<ApiResponse<CreateAirplaneResponse>> addAirplane(
            @Valid @RequestBody CreateAirplaneRequest airplaneRequest
             ){
 
-        Airplane newAirplane = airplaneService.createAirplane(airplaneRequest);
+        CreateAirplaneResponse newAirplaneResponse = airplaneService.createAirplane(airplaneRequest);
         System.out.println("Created a New Airplane");
-        ApiResponse<Airplane> response = ApiResponse.<Airplane>builder()
-                .success(true)
-                .status(HttpStatus.OK.value())
-                .message("Successfully Created Airplane")
-                .data(newAirplane)
-                .errors(Collections.emptyList())
-                .timestamp(LocalDateTime.now())
-                .path(ApiRoutes.API_V1+ApiRoutes.AIRPLANES)
-                .traceId("Testing correlation id")
-                .build();
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        return ResponseEntity.status(HttpStatus.CREATED).body(
+                ApiResponseBuilder.success(
+                    HttpStatus.CREATED.value(),
+                        "Successfully Created Airplane",
+                        newAirplaneResponse,
+                            ApiRoutes.API_V1+ApiRoutes.AIRPLANES
+        ));
     }
 
     // Get All Airplanes
