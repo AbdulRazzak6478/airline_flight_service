@@ -14,7 +14,5 @@ public interface AirplaneService {
 
     public Airplane  getAirplaneById(String id);
 
-//    public Airplane updateAirplaneById(UpdateAirplaneRequest airplane);
-
     public void deleteAirplaneById(String id);
 }

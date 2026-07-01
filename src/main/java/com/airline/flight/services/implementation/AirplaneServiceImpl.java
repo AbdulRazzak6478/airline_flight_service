@@ -4,11 +4,16 @@ import com.airline.flight.dto.airplane.request.CreateAirplaneRequest;
 import com.airline.flight.dto.airplane.response.CreateAirplaneResponse;
 import com.airline.flight.entity.Airplane;
 import com.airline.flight.exception.DuplicateResourceException;
+import com.airline.flight.exception.ResourceNotFoundException;
 import com.airline.flight.mapper.AirplaneMapper;
 import com.airline.flight.respositories.AirplaneRepository;
 import com.airline.flight.services.AirplaneService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 
 @Service
@@ -55,5 +60,24 @@ public class AirplaneServiceImpl implements AirplaneService {
 
         // Mapper Entity to Response DTO
         return AirplaneMapper.toResponse(saved);
+    }
+
+    @Override
+    public List<Airplane> getAirplanes() {
+
+        return airplaneRepository.findAll();
+    }
+
+    @Override
+    public Airplane getAirplaneById(String id) {
+
+        return airplaneRepository.findById(UUID.fromString(id))
+                .orElseThrow(()-> new ResourceNotFoundException("Airplane not found"));
+    }
+
+    @Override
+    public void deleteAirplaneById(String id){
+
+        airplaneRepository.deleteById(UUID.fromString(id));
     }
 }

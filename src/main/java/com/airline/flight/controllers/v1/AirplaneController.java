@@ -53,7 +53,7 @@ public class AirplaneController {
     @GetMapping
     public ResponseEntity<ApiResponse<List<Airplane>>> getAllAirplanes (){
 
-        List<Airplane> airplanes = new ArrayList<Airplane>();
+        List<Airplane> airplanes = airplaneService.getAirplanes();
 
         ApiResponse<List<Airplane>> response = ApiResponse.<List<Airplane>>builder()
                 .success(true)
@@ -71,15 +71,35 @@ public class AirplaneController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponse<Airplane>> getAirplane(
-           @PathVariable @NotBlank @Size(min=36,max=36) UUID id
+           @PathVariable @NotBlank @Size(min=36,max=36) String id
     ){
-        Airplane airplane = new Airplane();
+        Airplane airplane = airplaneService.getAirplaneById(id);
 
         ApiResponse<Airplane> response = ApiResponse.<Airplane>builder()
                 .success(true)
                 .status(HttpStatus.OK.value())
                 .message("Successfully Fetched Airplane")
                 .data(airplane)
+                .errors(Collections.emptyList())
+                .timestamp(LocalDateTime.now())
+                .path(ApiRoutes.API_V1+ApiRoutes.AIRPLANES+"/"+id)
+                .traceId("Testing correlation id")
+                .build();
+
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<ApiResponse<String>> deleteAirplane(
+            @PathVariable @NotBlank @Size(min=36,max=36) String id
+    ){
+        airplaneService.deleteAirplaneById(id);
+
+        ApiResponse<String> response = ApiResponse.<String>builder()
+                .success(true)
+                .status(HttpStatus.OK.value())
+                .message("Successfully Fetched Airplane")
+                .data("Airplane deleted Successfully")
                 .errors(Collections.emptyList())
                 .timestamp(LocalDateTime.now())
                 .path(ApiRoutes.API_V1+ApiRoutes.AIRPLANES+"/"+id)

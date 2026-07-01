@@ -31,6 +31,22 @@ public class GlobalExceptionHandler {
                 );
     }
 
+    // Resource Not Exception
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<ApiResponse<List<String>>> handleResourceNotFoundException(
+            ResourceNotFoundException ex,
+            HttpServletRequest request) {
+
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(
+                ApiResponseBuilder.failed(
+                        HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                        "Resource Not Found",
+                        List.of(ex.getMessage()),
+                        request.getRequestURI()
+                )
+        );
+    }
+
     // Duplicate Resource Exception
     @ExceptionHandler(DuplicateResourceException.class)
     public ResponseEntity<ApiResponse<List<String>>> handleDuplicateResourceException(
