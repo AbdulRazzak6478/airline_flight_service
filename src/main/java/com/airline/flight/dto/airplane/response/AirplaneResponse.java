@@ -12,7 +12,7 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateAirplaneResponse {
+public class AirplaneResponse {
 
     private UUID id;
 

@@ -2,7 +2,7 @@ package com.airline.flight.mapper;
 
 
 import com.airline.flight.dto.airplane.request.CreateAirplaneRequest;
-import com.airline.flight.dto.airplane.response.CreateAirplaneResponse;
+import com.airline.flight.dto.airplane.response.AirplaneResponse;
 import com.airline.flight.entity.Airplane;
 import org.springframework.stereotype.Component;
 
@@ -21,9 +21,9 @@ public class AirplaneMapper {
         return airplane;
     }
 
-    public static CreateAirplaneResponse toResponse(Airplane airplane)
+    public static AirplaneResponse toResponse(Airplane airplane)
     {
-        return CreateAirplaneResponse.builder()
+        return AirplaneResponse.builder()
                 .id(airplane.getId())
                 .modelNumber(airplane.getModelNumber())
                 .manufacturer(airplane.getManufacturer())

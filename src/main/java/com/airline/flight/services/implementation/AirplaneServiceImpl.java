@@ -1,7 +1,7 @@
 package com.airline.flight.services.implementation;
 
 import com.airline.flight.dto.airplane.request.CreateAirplaneRequest;
-import com.airline.flight.dto.airplane.response.CreateAirplaneResponse;
+import com.airline.flight.dto.airplane.response.AirplaneResponse;
 import com.airline.flight.entity.Airplane;
 import com.airline.flight.exception.DuplicateResourceException;
 import com.airline.flight.exception.ResourceNotFoundException;
@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 
@@ -23,7 +22,7 @@ public class AirplaneServiceImpl implements AirplaneService {
     private AirplaneRepository airplaneRepository;
 
     @Override
-    public CreateAirplaneResponse createAirplane(CreateAirplaneRequest airplaneRequest) {
+    public AirplaneResponse createAirplane(CreateAirplaneRequest airplaneRequest) {
 
         if(airplaneRequest.getSeatCapacity() > 700)
         {
@@ -63,16 +62,20 @@ public class AirplaneServiceImpl implements AirplaneService {
     }
 
     @Override
-    public List<Airplane> getAirplanes() {
+    public List<AirplaneResponse> getAirplanes() {
 
-        return airplaneRepository.findAll();
+        return airplaneRepository.findAll()
+                .stream()
+                .map(AirplaneMapper::toResponse)
+                .toList();
     }
 
     @Override
-    public Airplane getAirplaneById(String id) {
+    public AirplaneResponse getAirplaneById(String id) {
 
-        return airplaneRepository.findById(UUID.fromString(id))
+       Airplane airplane =  airplaneRepository.findById(UUID.fromString(id))
                 .orElseThrow(()-> new ResourceNotFoundException("Airplane not found"));
+        return AirplaneMapper.toResponse(airplane);
     }
 
     @Override

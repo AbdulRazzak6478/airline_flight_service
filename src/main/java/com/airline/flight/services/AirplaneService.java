@@ -1,18 +1,17 @@
 package com.airline.flight.services;
 
 import com.airline.flight.dto.airplane.request.CreateAirplaneRequest;
-import com.airline.flight.dto.airplane.response.CreateAirplaneResponse;
-import com.airline.flight.entity.Airplane;
+import com.airline.flight.dto.airplane.response.AirplaneResponse;
 
 import java.util.List;
 
 public interface AirplaneService {
 
-    public CreateAirplaneResponse createAirplane(CreateAirplaneRequest airplane);
+    public AirplaneResponse createAirplane(CreateAirplaneRequest airplane);
 
-    public List<Airplane> getAirplanes();
+    public List<AirplaneResponse> getAirplanes();
 
-    public Airplane  getAirplaneById(String id);
+    public AirplaneResponse  getAirplaneById(String id);
 
     public void deleteAirplaneById(String id);
 }
