@@ -81,6 +81,10 @@ public class AirplaneServiceImpl implements AirplaneService {
     @Override
     public void deleteAirplaneById(String id){
 
+        // Check Airplane Exist Or not
+        airplaneRepository.findById(UUID.fromString(id)).orElseThrow(()-> new ResourceNotFoundException("Airplane not found to delete"));
+
+        // Delete Airplane
         airplaneRepository.deleteById(UUID.fromString(id));
     }
 }

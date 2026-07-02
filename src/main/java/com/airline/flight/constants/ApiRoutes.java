@@ -11,11 +11,13 @@ public final class ApiRoutes {
 
     // Resources
     public static final String AIRPLANES = "/airplanes";
+    public static final String AIRPLANE_ID = "/{airplaneId}";
+
     public static final String CITIES = "/cities";
     public static final String AIRPORTS = "/airports";
     public static final String FLIGHTS = "/flights";
 
     // Nested Resources
-    public static final String AIRPLANE_SEATS = AIRPLANES + "/seats";
+    public static final String AIRPLANE_SEATS = "/seats";
 
 }

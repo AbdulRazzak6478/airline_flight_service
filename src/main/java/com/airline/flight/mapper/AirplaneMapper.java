@@ -2,8 +2,11 @@ package com.airline.flight.mapper;
 
 
 import com.airline.flight.dto.airplane.request.CreateAirplaneRequest;
+import com.airline.flight.dto.airplane.request.CreateAirplaneSeatRequest;
 import com.airline.flight.dto.airplane.response.AirplaneResponse;
+import com.airline.flight.dto.airplane.response.AirplaneSeatResponse;
 import com.airline.flight.entity.Airplane;
+import com.airline.flight.entity.AirplaneSeat;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -29,6 +32,29 @@ public class AirplaneMapper {
                 .manufacturer(airplane.getManufacturer())
                 .registrationNumber(airplane.getRegistrationNumber())
                 .seatCapacity(airplane.getSeatCapacity())
+                .build();
+    }
+
+    public static AirplaneSeat toAirplaneSeatEntity(CreateAirplaneSeatRequest  airplaneSeatRequest)
+    {
+        AirplaneSeat airplaneSeat = new AirplaneSeat();
+
+        airplaneSeat.setSeatNumber(airplaneSeatRequest.getSeatNumber());
+        airplaneSeat.setSeatClass(airplaneSeatRequest.getSeatClass());
+        airplaneSeat.setSeatType(airplaneSeatRequest.getSeatType());
+
+        return airplaneSeat;
+    }
+
+    public static AirplaneSeatResponse toAirplaneSeatResponse(AirplaneSeat airplaneSeat)
+    {
+        return AirplaneSeatResponse.builder()
+                .id(airplaneSeat.getId())
+                .seatNumber(airplaneSeat.getSeatNumber())
+                .seatClass(airplaneSeat.getSeatClass())
+                .seatType(airplaneSeat.getSeatType())
+                .createdAt(airplaneSeat.getCreatedAt())
+                .updatedAt(airplaneSeat.getUpdatedAt())
                 .build();
     }
 }

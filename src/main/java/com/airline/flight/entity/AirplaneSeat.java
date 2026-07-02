@@ -9,8 +9,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.annotations.UuidGenerator;
+import org.hibernate.type.SqlTypes;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -32,11 +34,13 @@ public class AirplaneSeat {
     private String seatNumber;
 
     @Enumerated(EnumType.STRING)
-    @Column( name = "seat_class", nullable = false)
+    @JdbcTypeCode(SqlTypes.NAMED_ENUM)
+    @Column(name = "seat_class", nullable = false)
     private SeatClass seatClass;
 
     @Enumerated(EnumType.STRING)
-    @Column( name = "seat_type", nullable = false)
+    @JdbcTypeCode(SqlTypes.NAMED_ENUM)
+    @Column(name = "seat_type", nullable = false)
     private SeatType seatType;
 
 
