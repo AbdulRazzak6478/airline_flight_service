@@ -59,9 +59,9 @@ public class Airport {
 
 
     @OneToMany(mappedBy = "departureAirport")
-    private List<Flight> departingFlights  = new ArrayList<>();
+    private List<Flight> departingFlights;
 
     @OneToMany(mappedBy = "arrivalAirport")
-    private List<Flight> arrivingFlights = new ArrayList<>();
+    private List<Flight> arrivingFlights;
 
 }

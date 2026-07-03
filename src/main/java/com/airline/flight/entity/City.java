@@ -49,5 +49,5 @@ public class City {
     private LocalDateTime updatedAt;
 
     @OneToMany(mappedBy = "city")
-    private List<Airport> airports = new ArrayList<>();
+    private List<Airport> airports;
 }
