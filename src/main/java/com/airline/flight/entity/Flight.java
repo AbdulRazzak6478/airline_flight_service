@@ -8,8 +8,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.annotations.UuidGenerator;
+import org.hibernate.type.SqlTypes;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
@@ -55,6 +57,7 @@ public class Flight {
     private BigDecimal price;
 
     @Enumerated(EnumType.STRING)
+    @JdbcTypeCode(SqlTypes.NAMED_ENUM)
     @Column( name = "status", nullable = false)
     private FlightStatus status;
 
