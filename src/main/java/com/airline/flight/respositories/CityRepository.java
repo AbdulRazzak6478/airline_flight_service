@@ -9,4 +9,6 @@ import java.util.UUID;
 
 @Repository
 public interface CityRepository extends JpaRepository<City, UUID> {
+
+    public Boolean existsByName(String name);
 }

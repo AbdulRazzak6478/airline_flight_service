@@ -18,6 +18,9 @@ public class CreateAirportRequest {
     @NotBlank( message ="Code is required.")
     private String code;
 
+    @NotBlank( message ="Name is required.")
+    private String name;
+
     @NotBlank( message ="Address is required.")
     private String address;
 

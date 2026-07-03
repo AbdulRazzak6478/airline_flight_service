@@ -15,8 +15,8 @@ public class CreateCityRequest {
     @NotBlank(message = "Name is required.")
     private String name;
 
-    @NotBlank( message = "Address is required.")
-    private String address;
+//    @NotBlank( message = "Address is required.")
+//    private String address;
 
     @NotBlank( message = "State is required.")
     private String state;

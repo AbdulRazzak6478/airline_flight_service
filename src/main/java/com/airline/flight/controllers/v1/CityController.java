@@ -6,12 +6,13 @@ import com.airline.flight.dto.city.request.CreateCityRequest;
 import com.airline.flight.dto.city.response.CityResponse;
 import com.airline.flight.dto.common.ApiResponse;
 import com.airline.flight.dto.common.ApiResponseBuilder;
+import com.airline.flight.services.CityService;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,12 +22,16 @@ public class CityController {
 
     private final String route = ApiRoutes.API_V1 + ApiRoutes.CITIES;
 
+    @Autowired
+    private CityService cityService;
+
     @PostMapping
     public ResponseEntity<ApiResponse<CityResponse>> createCity(
             @Valid @RequestBody CreateCityRequest createCityRequest
     ) {
 
-        CityResponse cityResponse = new CityResponse();
+        // Call service
+        CityResponse cityResponse = cityService.createCity(createCityRequest);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(
                 ApiResponseBuilder.success(
@@ -42,7 +47,8 @@ public class CityController {
     @GetMapping
     public ResponseEntity<ApiResponse<List<CityResponse>>> getAllCities() {
 
-        List<CityResponse> cityResponseList = new ArrayList<>();
+        // Call service
+        List<CityResponse> cityResponseList = cityService.getCities();
 
         return ResponseEntity.status(HttpStatus.OK).body(
                 ApiResponseBuilder.success(
@@ -58,7 +64,8 @@ public class CityController {
     @GetMapping("/{cityId}")
     public ResponseEntity<ApiResponse<CityResponse>> getSpecificCity(@PathVariable UUID cityId) {
 
-        CityResponse cityResponse = new CityResponse();
+        // Get City
+        CityResponse cityResponse = cityService.getCity(cityId);
 
         return ResponseEntity.status(HttpStatus.OK).body(
                 ApiResponseBuilder.success(
@@ -74,7 +81,8 @@ public class CityController {
     @GetMapping("/{cityId}" + ApiRoutes.AIRPORTS)
     public ResponseEntity<ApiResponse<List<AirportResponse>>> getSpecificCityAirports(@PathVariable UUID cityId) {
 
-        List<AirportResponse> airportResponseList = new ArrayList<>();
+        // Call service
+        List<AirportResponse> airportResponseList = cityService.getCityAirports(cityId);
 
         return ResponseEntity.status(HttpStatus.OK).body(
                 ApiResponseBuilder.success(
@@ -85,8 +93,5 @@ public class CityController {
                 )
         );
     }
-
-
-
 
 }

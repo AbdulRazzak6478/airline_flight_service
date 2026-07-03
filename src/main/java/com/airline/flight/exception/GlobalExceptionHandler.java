@@ -116,7 +116,7 @@ public class GlobalExceptionHandler {
                 ApiResponseBuilder.failed(
                         HttpStatus.BAD_REQUEST.value(),
                         "Malformed Request",
-                        List.of("Request body contains invalid or malformed data."),
+                        List.of(ex.getMessage()),
                         request.getRequestURI()
                 )
         );
