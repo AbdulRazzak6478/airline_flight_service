@@ -2,6 +2,7 @@ package com.airline.flight.mapper;
 
 import com.airline.flight.dto.airport.request.CreateAirportRequest;
 import com.airline.flight.dto.airport.response.AirportResponse;
+import com.airline.flight.dto.airport.response.AirportSummaryResponse;
 import com.airline.flight.entity.Airport;
 import org.springframework.stereotype.Component;
 
@@ -31,5 +32,14 @@ public class AirportMapper {
         airportResponse.setCreatedAt(airport.getCreatedAt());
         airportResponse.setUpdatedAt(airport.getUpdatedAt());
         return airportResponse;
+    }
+
+    public static AirportSummaryResponse toSummaryResponse(Airport airport) {
+
+        return AirportSummaryResponse.builder()
+                .id(airport.getId())
+                .name(airport.getName())
+                .code(airport.getCode())
+                .build();
     }
 }

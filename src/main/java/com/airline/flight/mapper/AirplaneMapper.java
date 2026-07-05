@@ -5,6 +5,7 @@ import com.airline.flight.dto.airplane.request.CreateAirplaneRequest;
 import com.airline.flight.dto.airplane.request.CreateAirplaneSeatRequest;
 import com.airline.flight.dto.airplane.response.AirplaneResponse;
 import com.airline.flight.dto.airplane.response.AirplaneSeatResponse;
+import com.airline.flight.dto.airplane.response.AirplaneSummaryResponse;
 import com.airline.flight.entity.Airplane;
 import com.airline.flight.entity.AirplaneSeat;
 import org.springframework.stereotype.Component;
@@ -55,6 +56,15 @@ public class AirplaneMapper {
                 .seatType(airplaneSeat.getSeatType())
                 .createdAt(airplaneSeat.getCreatedAt())
                 .updatedAt(airplaneSeat.getUpdatedAt())
+                .build();
+    }
+
+    public static AirplaneSummaryResponse toSummaryResponse(Airplane airplane)
+    {
+        return AirplaneSummaryResponse.builder()
+                .id(airplane.getId())
+                .modelNumber(airplane.getModelNumber())
+                .manufacturer(airplane.getManufacturer())
                 .build();
     }
 }

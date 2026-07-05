@@ -4,9 +4,12 @@ package com.airline.flight.controllers.v1;
 import com.airline.flight.constants.ApiRoutes;
 import com.airline.flight.dto.common.ApiResponse;
 import com.airline.flight.dto.common.ApiResponseBuilder;
+import com.airline.flight.dto.common.PageResponse;
 import com.airline.flight.dto.flight.request.CreateFlightRequest;
+import com.airline.flight.dto.flight.request.FlightSearchRequest;
 import com.airline.flight.dto.flight.request.UpdateFlightRequest;
 import com.airline.flight.dto.flight.response.FlightResponse;
+import com.airline.flight.dto.flight.response.FlightWithAssociatesResponse;
 import com.airline.flight.services.FlightService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,15 +47,22 @@ public class FlightController {
     }
 
     @GetMapping
-    public ResponseEntity<ApiResponse<List<FlightResponse>>> getFlights(){
+    public ResponseEntity<ApiResponse<PageResponse<FlightWithAssociatesResponse>>> getFlights(
+            @ModelAttribute FlightSearchRequest searchRequest
+            ){
 
-        List<FlightResponse>  flightResponseList = flightService.getAllFlights();
+        PageResponse<FlightWithAssociatesResponse> flights =  flightService.getFlights(searchRequest);
+
+        System.out.println("getFlights Called");
+
+
+//        List<FlightResponse>  flightResponseList = flightService.getAllFlights();
 
         return ResponseEntity.status(HttpStatus.OK).body(
                 ApiResponseBuilder.success(
                         HttpStatus.OK.value(),
                         "Flights Fetched Successfully",
-                        flightResponseList,
+                        flights,
                         route
                 )
         );
