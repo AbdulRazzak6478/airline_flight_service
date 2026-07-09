@@ -40,7 +40,7 @@ public class Airplane {
     private String registrationNumber;
 
     @Column(name = "seat_capacity",  nullable = false)
-    private int seatCapacity;
+    private Integer seatCapacity;
 
 
     @CreationTimestamp

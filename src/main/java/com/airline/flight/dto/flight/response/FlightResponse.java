@@ -29,6 +29,8 @@ public class FlightResponse {
     private String boardingGate;
     private FlightStatus status;
 
+    private Integer availableSeats;
+
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }

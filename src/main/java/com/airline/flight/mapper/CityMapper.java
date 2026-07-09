@@ -11,6 +11,7 @@ public class CityMapper {
     public static City toEntity(CreateCityRequest createCityRequest) {
         City city = new City();
         city.setName(createCityRequest.getName().toUpperCase());
+        city.setCode(createCityRequest.getCode());
         city.setCountry(createCityRequest.getCountry());
         city.setState(createCityRequest.getState());
         return city;
@@ -20,6 +21,7 @@ public class CityMapper {
         CityResponse cityResponse = new CityResponse();
 
         cityResponse.setId(city.getId());
+        cityResponse.setCode(city.getCode());
         cityResponse.setName(city.getName());
         cityResponse.setCountry(city.getCountry());
         cityResponse.setState(city.getState());

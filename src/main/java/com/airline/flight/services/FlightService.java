@@ -21,5 +21,7 @@ public interface FlightService {
 
     public FlightResponse getFlight(UUID flightId);
 
+    public FlightResponse updateAvailableSeats(UUID flightId, Integer bookingSeats);
+
     public FlightResponse updateFlightDetails(UUID flightId, UpdateFlightRequest updateFlightRequest);
 }

@@ -193,6 +193,22 @@ public class FlightServiceImpl implements FlightService {
     }
 
     @Override
+    public FlightResponse updateAvailableSeats(UUID flightId, Integer bookingSeats) {
+        System.out.println("Inside the Flight Response");
+        // Check flight exist or not
+        Flight flight = flightRepository.findById(flightId)
+                .orElseThrow(()-> new ResourceNotFoundException("Flight Not Found"));
+
+        flight.setAvailableSeats(flight.getAvailableSeats() -  bookingSeats);
+
+        System.out.println("Flight : "+flight.getFlightNumber());
+        //Save flight seats updates
+        Flight savedFlight = flightRepository.save(flight);
+
+        return FlightMapper.toResponse(savedFlight);
+    }
+
+    @Override
     public FlightResponse updateFlightDetails(UUID flightId, UpdateFlightRequest updateFlightRequest) {
 
         // Date Business Validations

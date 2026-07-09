@@ -18,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @RestController
@@ -34,6 +35,7 @@ public class FlightController {
             @Valid @RequestBody CreateFlightRequest createFlightRequest
             ) {
 
+        System.out.println("createFlight controller");
         FlightResponse  flightResponse = flightService.createFlight(createFlightRequest);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(
@@ -98,6 +100,26 @@ public class FlightController {
                 ApiResponseBuilder.success(
                         HttpStatus.OK.value(),
                         "Flight Updated Successfully",
+                        flightResponse,
+                        route
+                )
+        );
+    }
+    // Update Flight Details
+    @PatchMapping("/{flightId}/seats")
+    public ResponseEntity<ApiResponse<FlightResponse>> updateFlightAvailableSeats(
+            @PathVariable UUID flightId,
+            @RequestBody Map<String, Integer> body
+    ){
+
+        Integer bookingSeats = body.get("bookingSeats");
+        System.out.println("Booking Seats : "+bookingSeats);
+        FlightResponse  flightResponse = flightService.updateAvailableSeats(flightId, bookingSeats);
+
+        return ResponseEntity.status(HttpStatus.OK).body(
+                ApiResponseBuilder.success(
+                        HttpStatus.OK.value(),
+                        "Flight Seats Updated Successfully",
                         flightResponse,
                         route
                 )

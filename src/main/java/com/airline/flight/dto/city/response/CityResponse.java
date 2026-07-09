@@ -16,6 +16,7 @@ public class CityResponse {
 
     private UUID id;
     private String name;
+    private String code;
     private String state;
     private String country;
 }

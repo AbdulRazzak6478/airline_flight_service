@@ -33,6 +33,9 @@ public class City {
     @Column(name = "name", nullable = false,  unique = true)
     private String name;
 
+    @Column( name = "code", nullable = false, unique = true)
+    private String code;
+
     @Column(name = "state", nullable = false)
     private String state;
 

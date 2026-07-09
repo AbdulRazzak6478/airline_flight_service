@@ -18,6 +18,7 @@ public class FlightMapper {
                 .price(createFlightRequest.getPrice())
                 .boardingGate(createFlightRequest.getBoardingGate())
                 .status(createFlightRequest.getStatus())
+                .availableSeats(createFlightRequest.getAvailableSeats())
                 .build();
     }
 
@@ -30,6 +31,7 @@ public class FlightMapper {
                 .price(flight.getPrice())
                 .boardingGate(flight.getBoardingGate())
                 .status(flight.getStatus())
+                .availableSeats(flight.getAvailableSeats())
                 .createdAt(flight.getCreatedAt())
                 .updatedAt(flight.getUpdatedAt())
                 .build();

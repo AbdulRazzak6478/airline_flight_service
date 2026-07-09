@@ -56,6 +56,9 @@ public class Flight {
     @Column( name = "price", nullable = false)
     private BigDecimal price;
 
+    @Column(name = "available_seats",  nullable = true)
+    private Integer availableSeats;
+
     @Enumerated(EnumType.STRING)
     @JdbcTypeCode(SqlTypes.NAMED_ENUM)
     @Column( name = "status", nullable = false)

@@ -54,6 +54,10 @@ public class CreateFlightRequest {
     )
     private BigDecimal price;
 
+    @NotNull(message = "Available Seats is required.")
+    @Min(value = 0, message = "Available Seats cannot be negative.")
+    private Integer availableSeats;
+
     @NotNull( message = "Status is required.")
     private FlightStatus status;
 
